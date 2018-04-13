@@ -1,0 +1,101 @@
+\ProvidesPackage{mymath}
+
+
+
+%%%%% PACKAGES AND LIBRARIES
+
+\usepackage{amsmath}               % Environments, etc. for typsetting math.
+\usepackage{amsthm}                % Theorem/proof environments.
+\usepackage{amssymb}               % Various symbols.
+\usepackage{geometry}              % Easy interface to set page margins.
+\usepackage{fancyhdr}              % Custom headers/footers, page styles.
+\usepackage[shortlabels]{enumitem} % Stuff for enumerate, itemize environments.
+\usepackage{graphicx}
+\usepackage{fbb}
+\usepackage{titlesec}
+\usepackage{environ}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{centernot}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable,skins}
+\usepackage{xifthen}
+\usepackage{scrextend}
+
+
+
+%%%%% PAGE FORMAT
+
+\geometry{margin=1.8cm}            % Sets margins on all sides.
+\pagestyle{fancyplain}             % Sets page style.
+\headheight 35pt                   % Sets the height of the header.
+\headsep 10pt                      % Sets space between the header and the body.
+\setlength{\parindent}{0em}        % Sets paragraph indentation.
+\setlength{\parskip}{0.5em}        % Sets space between paragraphs.
+\setlist[itemize]{leftmargin=*}    % Normalize left margin in itemize. 
+\setlist[enumerate]{leftmargin=*}  % Normalize left margin in enumerate.
+\titlespacing{\paragraph}{0mm}{2mm}{4mm}
+\linespread{1.3}
+
+
+
+%%%%% ENVIRONMENTS AND COMMANDS
+
+\newcommand{\EndSymbol}[1]{\hspace*{5mm}\hfill $#1$}
+
+\newcommand{\NewMathEnviron}[4]{
+    \NewEnviron{#1}[1][\unskip]{\paragraph{#1 ##1}\hspace{0.01mm} \BODY #4}
+    \tcolorboxenvironment{#1}{
+        blanker,
+        before skip=6pt,
+        after skip=6pt,
+        borderline west={1mm}{0pt}{#2},
+        left=3mm,
+        #3
+    }
+}
+
+\NewEnviron{Problem}[1]{\subsection*{Problem #1} \BODY}
+\NewMathEnviron{Hypothesis}{Maroon}{}{}
+\NewMathEnviron{Claim}{OliveGreen}{}{}
+\NewMathEnviron{Proof}{Blue}{breakable}{\EndSymbol{\qedsymbol}}
+\NewMathEnviron{Definition}{BurntOrange}{}{}
+\NewMathEnviron{Todo}{red}{}{}
+\NewMathEnviron{Note}{ProcessBlue}{}{}
+\NewEnviron{Case}[2]{
+    \begin{tcolorbox}[
+        blanker,
+        before skip=6pt,
+        after skip=6pt,
+        borderline west={1mm}{0pt}{violet},
+        left=3mm
+    ]
+    \vspace{1mm}
+    \paragraph{Case #1}\hspace{0.01mm} #2
+    \end{tcolorbox}
+    \BODY
+    \EndSymbol{\ast}
+    \vspace{2mm}
+    % Keep this empty line:
+    
+}
+
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator*{\argmax}{\arg\!\max}
+\newcommand{\Braces}[1]{\left\{ #1 \right\}}
+\newcommand{\Brackets}[1]{\left[ #1 \right]}
+\newcommand{\Parens}[1]{\left( #1 \right)}
+\newcommand{\Abs}[1]{\left| #1 \right|}
+\newcommand{\de}{\delta}
+\newcommand{\e}{\epsilon}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\All}[1]{\forall #1 \,\,\,}
+\newcommand{\AllP}[1]{\Parens{\forall #1} \,}
+\newcommand{\AllPD}[1]{\Parens{\forall #1} \quad}
+\newcommand{\Exists}[1]{\exists\, #1 :}
+\newcommand{\Lim}[2]{\lim_{#1 \rightarrow #2}}
+\newcommand{\LimSup}[2]{\limsup_{#1 \rightarrow #2}}
+\newcommand{\LimInf}[2]{\liminf_{#1 \rightarrow #2}}
+\newcommand{\NotImplies}{\centernot\implies}
+\newcommand{\mat}[4]{\begin{pmatrix} #1 & #2 \\ #3 & #4 \end{pmatrix}}
+

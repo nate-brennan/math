@@ -1,0 +1,359 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{mymath}
+
+\lhead{Nate Brennan}
+\chead{\textbf{\Large Rudin Problems}}
+\rhead{\today}
+
+\begin{document}
+
+\begin{Problem}{3.1}
+\begin{Hypothesis} $\{s_n\}$ is a sequence in $\R$. \end{Hypothesis} 
+\begin{Claim} $\{s_n\}$ converges $\implies \{|s_n|\}$ converges \end{Claim}
+\begin{Proof}
+Assume $\Braces{s_n}$ converges to $p\in\R$. By the definition of convergence, we have
+\[ \All{\epsilon>0}\Exists{N} n>N \implies |p-s_n|<\epsilon \]
+For all $x,y \in\R$, we have $||x|-|y|| \leq |x-y|$. So for all $n$, we have $|p-s_n|<\epsilon \implies ||p|-|s_n||<\epsilon$. Therefore,
+\[ \All{\epsilon>0}\Exists{N} n>N \implies ||p|-|s_n||<\epsilon \]
+So $\Braces{|s_n|}$ converges to $|p|$. 
+\end{Proof}
+\begin{Claim} $\{|s_n|\}$ converges $\NotImplies \{s_n\}$ converges \end{Claim}
+\begin{Proof}
+Counterexample: $s_n = (-1)^n$.
+\end{Proof}
+\end{Problem}
+
+\begin{Problem}{3.2}
+\begin{Hypothesis} $\Braces{p_n}$ is a sequence in $\R$ such that $p_n = \sqrt{n^2 + n} - n$ \end{Hypothesis}
+\begin{Claim} $\Braces{p_n}$ converges to $\frac{1}{2}$. \end{Claim}
+\begin{Proof}
+First, I will show that $\Braces{p_n}$ is bounded. For all $n$, we have $\sqrt{n^2+n}>\sqrt{n^2}=n$, so $\sqrt{n^2 + n} - n > 0$. Seeking a contradiction, assume that $\frac{1}{2}$ is not an upper bound for $\Braces{p_n}$. For some $n$, we have
+\begin{align*}
+    \sqrt{n^2 + n} - n &> \frac{1}{2} \\
+    \sqrt{n^2 + n} &> \frac{1}{2} + n \\
+    n^2 + n &> \frac{1}{4} + n + n^2 \\
+    0 &> \frac{1}{4}
+\end{align*}
+We have reached a contradiction, therefore $\frac{1}{2}$ must be an upper bound for $\Braces{p_n}$.
+
+\begin{Todo} Now I will show that $\Braces{p_n}$ is strictly increasing. \end{Todo}
+
+$\Braces{p_n}$ is monotonic and bounded, so by theorem 3.14 we can conclude that it converges. In the proof of this theorem, we see that $\Braces{p_n}$ must converge to its least upper bound. 
+
+\begin{Todo} I will now show that $\Braces{p_n}$ has a least upper bound of $\frac{1}{2}$. \end{Todo}
+\end{Proof}
+\end{Problem}
+
+\begin{Problem}{3.3}
+\begin{Hypothesis} Define $\Braces{s_n}$ by $s_1 = \sqrt{2}$ and $s_n = \sqrt{2 + \sqrt{s_{n-1}}}$ for $n=2,3,\ldots$ \end{Hypothesis}
+\begin{Claim} $\AllP{n} s_n < 2$ \end{Claim}
+\begin{Proof}
+    I will prove this by induction on $n$.
+    
+    Base case: by definition, $s_1 < 2$.
+    
+    Induction hypothesis: Assume $s_{n-1} < 2$.
+    
+    We have $s_n = \sqrt{2 + \sqrt{s_{n-1}}} < \sqrt{2 + \sqrt{2}} < \sqrt{4} = 2$.
+\end{Proof}
+\begin{Claim} $\Braces{s_n}$ converges. \end{Claim}
+\begin{Proof}
+    Clearly, $\AllP{n}s_n\geq0$. Combining this with the previous result, we see $\Braces{s_n}$ is bounded. 
+    
+    \begin{Todo} Now I will show that $\Braces{s_n}$ is strictly increasing. \end{Todo}
+    
+    Invoking theorem 3.14, we can see that $\Braces{s_n}$ converges.
+\end{Proof}
+\end{Problem}
+
+\begin{Problem}{3.4}
+\begin{Hypothesis} Let $\Braces{s_n}$ be defined by $s_1=0$, $s_{2m}=\frac{s_{2m-1}}{2}$, $s_{2m+1}=\frac{1}{2}+s_{2m}$ for $m=1,2,\ldots$  \end{Hypothesis}
+\begin{Claim} $s_{2m+1} = 1 - \frac{1}{2^m}$ for $m=0,1,\ldots$ \end{Claim}
+\begin{Proof}
+I will prove this by induction on $m$.
+
+Base case: For $m = 0$, we have $s_1 = 1 = 1 - \frac{1}{2^0}$.
+
+Inductive hypothesis: Assume $s_{2m+1} = 1 - \frac{1}{2^m}$. Then we have $s_{2m+2} = \frac{s_{2m+1}}{2}=\frac{1}{2}-\frac{1}{2^{m+1}}$. And so $s_{2(m+1)+1} = s_{2m+3} = \frac{1}{2}+s_{2m+2} = 1-\frac{1}{2^{m+1}}$.
+
+Note that $\Braces{s_{2m+1}}$ is strictly increasing and bounded above by 1.
+\end{Proof}
+\begin{Claim} $s_{2m} = \frac{1}{2} - \frac{1}{2^m}$ for $m=1,2,\ldots$ \end{Claim}
+\begin{Proof}
+By the definition of $s_{2m+1}$ we have 
+\begin{align*}
+    s_{2m} &= s_{2m+1}-\frac{1}{2} \\
+    &= 1-\frac{1}{2^m}-\frac{1}{2} \\
+    &= \frac{1}{2} - \frac{1}{2^m}
+\end{align*}
+\end{Proof}
+\begin{Claim} $\LimSup{n}{\infty}s_n = 1$ and $\LimInf{n}{\infty}s_n = \frac{1}{2}$ \end{Claim}
+\begin{Proof}
+Let $E$ consist of all the subsequential limits of $\Braces{s_n}$. I will show that $E=\Braces{\frac{1}{2},1}$.
+
+Let $\Braces{s_{n_k}}$ be a subequence of $\Braces{s_n}$ indexed by $k$. Let $I=\Braces{n_k : k\in\N}$ be the set of indices. There are three cases:
+\begin{Case}{1}{$I$ contains infinitely many odd numbers and finitely many even numbers.}
+    Note that there exists $K$ such that $k \geq K \implies n_k$ is odd. Consider an arbitrary $\e>0$. Let $z$ be the smallest integer that has these two properties:
+    \begin{enumerate}
+        \item $2z+1 \geq K$
+        \item $1-\e < 1-\frac{1}{2^z} = s_{2z+1}$
+    \end{enumerate}
+    From the first property, we have $n_k \geq 2z+1 \implies n_k$ is odd. Taking into account the second property and the fact that $\Braces{s_{2m+1}}$ is increasing, we have $n_k \geq 2z+1 \implies 1-\e < s_{n_k}$. Finally, we note that $\Braces{s_{2m+1}}$ is bounded by 1, and conclude $n_k \geq 2z+1 \implies 1-\e < s_{n_k} < 1$. Let $K'$ be the smallest element of $I$ that is greater than or equal to $2z+1$. We have shown:
+    \[ \All{\e>0}\Exists{K'} k \geq K' \implies |1-s_{n_k}|<\e \]
+    Therefore, $\Braces{s_{n_k}}$ converges to 1. 
+\end{Case}
+\begin{Case}{2}{$I$ contains finitely many odd numbers and infinitely many even numbers.}
+    Note that there exists $K$ such that $k \geq K \implies n_k$ is even. Consider an arbitrary $\e>0$. Let $z$ be the smallest integer that has these two properties:
+    \begin{enumerate}
+        \item $2z \geq K$
+        \item $\frac{1}{2}-\e < \frac{1}{2}-\frac{1}{2^z} = s_{2z}$
+    \end{enumerate}
+    From the first property, we have $n_k \geq 2z \implies n_k$ is even. Taking into account the second property and the fact that $\Braces{s_{2m}}$ is increasing, we have $n_k \geq 2z \implies \frac{1}{2}-\e < s_{n_k}$. Finally, we note that $\Braces{s_{2m}}$ is bounded by $\frac{1}{2}$, and conclude $n_k \geq 2z+1 \implies \frac{1}{2}-\e < s_{n_k} < \frac{1}{2}$. Let $K'$ be the smallest element of $I$ that is greater than or equal to $2z$. We have shown:
+    \[ \All{\e>0}\Exists{K'} k \geq K' \implies \Abs{\frac{1}{2}-s_{n_k}}<\e \]
+    Therefore, $\Braces{s_{n_k}}$ converges to $\frac{1}{2}$. 
+\end{Case}
+\begin{Case}{3}{$I$ contains infinitely many odd numbers and infinitely many even numbers.}
+    As shown above, the subsequence of $\Braces{s_{n_k}}$ consisting of all odd indices converges to 1. The subsequence consisting of all even indices converges to $\frac{1}{2}$. A sequence converges to $p$ if and only if every subsequence converges to $p$, so since $\Braces{s_{n_k}}$ has two subsequences that converge to different points, $\Braces{s_{n_k}}$ does not converge.
+\end{Case}
+I have proved $E=\Braces{\frac{1}{2},1}$. Therefore, the upper limit of $\Braces{s_n}$ is 1, and the lower limit is $\frac{1}{2}$.
+\end{Proof}
+\end{Problem}
+
+\subsection*{Problem 4.1}
+\paragraph{Hypothesis}
+Let $f : \mathbb{R} \rightarrow \mathbb{R}$. For $x \in \mathbb{R}$, let $g_x : \mathbb{R}_{>0} \rightarrow \mathbb{R} : h \rightarrow f(x+h)-f(x-h)$. For every $x$, $g_x$ has the property that that $\lim_{h \rightarrow 0}g_x(h) = 0$.
+
+\paragraph{Claim} $f$ is continuous. 
+
+\paragraph{Proof} First, I'll expand the information above using the definition of limit:
+\[ \forall x\in\mathbb{R},\epsilon>0 \,\,\, \exists\delta>0 : \forall h \in (0, \delta) \,\,\, |g_x(h)|<\epsilon \]
+Now, substituting in the definition of $g_x$:
+\begin{align}\label{4.1.1} \forall x\in\mathbb{R},\epsilon>0 \,\,\, \exists\delta>0 : \forall h \in (0, \delta) \,\,\, |f(x+h)-f(x-h)|<\epsilon \end{align}
+We want to show:
+\begin{align}\label{4.1.2} \forall x\in\mathbb{R},\epsilon>0 \,\,\, \exists\delta>0 : \forall h \in\mathbb{R} \,\,\, |x-h|<\delta \implies |f(x)-f(h)|<\epsilon \end{align}
+
+Fix an $x\in\mathbb{R}$ and $\epsilon>0$. Let $h \in \mathbb{R}$.
+
+Let $x' = (x+h)/2$. Let $h' = |x'-x|$. So we have $\{x,h\}=\{x'+h',x'-h'\}$. By statement \ref{4.1.1}, for $x'$ and $\epsilon$, there exists a $\delta$ with the property that $\forall h'' \in (0, \delta),\,|f(x'+h'')-f(x'-h'')|<\epsilon$. So $h' < \delta \implies |f(x'+h')-f(x'-h')|=|f(x)-f(h)|<\epsilon$. Note that $h' = |x-h|/2$, so $h' < \delta \iff |x-h| < 2\delta$. So we have $|x-h| < 2\delta \implies |f(x)-f(h)|<\epsilon$, which proves statement \ref{4.1.2}. Therefore, $f$ is continuous. 
+
+\subsection*{Problem 4.12}
+\paragraph{Hypothesis} $f:X \rightarrow Y$ and $g: f(X) \rightarrow Z$ are uniformly continuous.
+\paragraph{Claim} $g \circ f$ is uniformly continuous.
+\paragraph{Proof} Let $\epsilon_1 > 0$. We have
+\[ \exists\epsilon_2>0 : \forall y_1,y_2 \in f(X) \,\,\, d_Y(y_1,y_2)<\epsilon_2 \implies d_Z(g(y_1),g(y_2))<\epsilon_1 \]
+Further, we have
+\[ \exists\epsilon_3>0 : \forall x_1,x_2 \in X \,\,\, d_X(x_1,x_2)<\epsilon_3 \implies d_Y(f(x_1),f(x_2))<\epsilon_2 \]
+Putting these together, we get
+\[ \forall x_1,x_2 \in X \,\,\, d_X(x_1,x_2)<\epsilon_3 \implies d_Y(f(x_1),f(x_2))<\epsilon_2 \implies d_Z((g \circ f)(x_1),(g \circ f)(x_2))<\epsilon_1 \]
+This proves that $g \circ f$ is uniformly continuous. 
+
+\subsection*{Problem 4.13}
+\paragraph{Hypothesis} Let $E$ be a dense subset of metric space $X$, and let $f$ be a uniformly continuous real function on $E$. 
+\paragraph{Claim} $f$ has a continuous extension from $E$ to $X$.
+\paragraph{Proof} For every $p \in X$, either $p \in E$ or $p$ is a limit point of $E$. In the latter case, there must exist a sequence $\{e_n\}$ such that each $e_n \in E$ and it converges to $p$. We now define the function $g: X \rightarrow \mathbb{R}$ as follows:
+\[ g(p) = \begin{cases}f(p) & p \in E \\ \lim_{n \rightarrow \infty}f(e_n) & p \notin E \end{cases} \]
+where $\{e_n\}$ is a sequence with the above properties. To show $g$ is well-defined, we will show that for any two sequences $\{p_n\}$ and $\{q_n\}$ that converge to $p$, $\{f(p_n)\}$ and $\{f(q_n)\}$ converge to the same point in $\mathbb{R}$.
+
+From the definition of convergence, we have 
+\[ \forall\delta>0 \,\,\, \exists N : n > N \implies d(p,p_n) < \delta/2 \]
+\[ \forall\delta>0 \,\,\, \exists N : n > N \implies d(p,q_n) < \delta/2 \]
+Using the triangle inequality, we have
+\[ \forall\delta>0 \,\,\, \exists N : n > N \implies d(p_n,q_n) \leq d(p_n,p) + d(p,q_n) < \delta\]
+From the definition of continuity, we have
+\[ \forall\epsilon>0 \,\,\, \exists\delta>0 : d(p_n,q_n) < \delta \implies |f(p_n)-f(q_n)|<\epsilon \]
+Combining the previous two equations, we get
+\[ \forall\epsilon>0 \,\,\, \exists N : n > N \implies |f(p_n)-f(q_n)|<\epsilon \]
+Therefore $\{f(p_n)\}$ and $\{f(q_n)\}$ converge to the same point in $\mathbb{R}$, so $g$ is well-defined.
+
+Now we will show that $g$ is continuous. We need to show the following:
+\begin{align}\label{4.13 wts} \forall p \in X, \epsilon>0 \,\,\, \exists \delta>0 : \forall q \in X \,\,\, d(p,q)<\delta \implies |g(p)-g(q)|<\epsilon \end{align}
+Fix an arbitrary $p \in X$ and $\epsilon>0$. Let $\{p_n\}$ be a sequence in $E$ that converges to $p$ (we know this exists because if $p \in E$, we can use $p_n=p$, and if $p \notin E$, then $p$ is a limit point of $E$, so there must exist such a sequence). 
+Because $f$ is uniformly continuous and $\forall p \in E, f(p)=g(p)$ we can define $\delta>0$ such that
+\begin{align}\label{4.13 delta def} \forall x,y \in E \,\,\, d(x,y)<\delta \implies |g(x)-g(y)|<\epsilon/2 \end{align}
+Let $q \in X$ such that $d(p,q) < \delta/2$. Let $\{p_n\}$ be a sequence in $E$ that converges to $q$. We have
+\[ \exists N : n>N \implies d(p,p_n)<\delta/4 \,\land\, d(q,q_n)<\delta/4 \]
+Using the triangle inequality, we get
+\begin{align}\label{4.13 within delta} \exists N : n>N \implies d(p_n,q_n) \leq d(p_n,p)+d(p,q)+d(q,q_n)<\delta/4 + \delta/2 + \delta/4 = \delta \end{align}
+Combining (\ref{4.13 within delta}) with (\ref{4.13 delta def}), we get
+\begin{align}\label{4.13 within eps/2} \exists N : n>N \implies |g(p_n)-g(q_n)|<\epsilon/2 \end{align}
+Note that by the definition of $g$, $\{g(p_n)\}$ converges to $g(p)$ and $\{g(q_n)\}$ converges to $g(q)$. So we have
+\begin{align}\label{4.13 within eps/4} \exists N : n>N \implies |g(p)-g(p_n)|<\epsilon/4 \,\land\, |g(q)-g(q_n)|<\epsilon/4 \end{align}
+Let $N$ be an integer with the properties of both (\ref{4.13 within eps/2}) and (\ref{4.13 within eps/4}). Let $n > N$.
+\begin{align*}
+|g(p)-g(q)| &\leq |g(p)-g(p_n)| + |g(p_n)-g(q_n)| + |g(q_n)-g(q)| \\
+&< \epsilon/4 + \epsilon/2 + \epsilon/4 \\
+&= \epsilon
+\end{align*}
+I have showed that $\forall q \in X, d(p,q)<\delta/2 \implies |g(p)-g(q)|<\epsilon$. This proves (\ref{4.13 wts}).
+
+\begin{Problem}{4.15}
+\begin{Definition} A function $f: X \rightarrow Y$ is \textit{open} if for every subset $V$ of $X$, $V$ is open $\implies f(V)$ is open. \end{Definition}
+\begin{Hypothesis} $f:\R\rightarrow\R$ is continuous and open. \end{Hypothesis}
+\begin{Claim} $f$ is monotonic. \end{Claim}
+\begin{Proof}
+\begin{Definition} A function $f: \R \rightarrow \R$ has a \textit{semi maximum} at $x\in\R$ if $\Exists{y<x}f(y)<f(x)$ and $\Exists{y>x}f(y)<f(x)$. \textit{Semi minimum} is defined similarly. \end{Definition}
+Seeking a contradiction, assume $f$ has a semi maximum at some point $x$. There exists $y_1<x$ such that $f(y_1)<f(x)$ and $y_2>x$ such that $f(y_2)<f(x)$. $f$ is continuous on $[y_1,y_2]$, therefore it takes a maximum value at some $z \in [y_1,y_2]$. The max cannot be located at $y_1$ or $y_2$ by definition, therefore we have $z \in (y_1,y_2)$ such that $\AllP{w\in(y_1,y_2)} f(w) \leq f(z)$. So we have $f(z) \in f((y_1,y_2))$, but $f(z)$ is not an interior point of $f((y_1,y_2))$, which means that $f((y_1,y_2))$ is not open. This contradicts our assumption that $f$ is open. Therefore, $f$ does not have a semi maximum. By a similar argument, $f$ does not have a semi minimum.
+
+\begin{Todo} Prove that $\Parens{\Exists{a,b\in\R}a<b \land f(a)<f(b)} \implies f$ is monotonically increasing. This will make the cases below much easier. \end{Todo}
+
+Now choose an $x\in\R$. We consider two cases:
+\begin{Case}{1}{$\Exists{y<x}f(y)<f(x)$}
+    Seeking a contradiction, assume $\Exists{z<x}f(z)>f(x)$. If $z<y$, then $f$ would have a semi minimum at $y$. If $y<z$, then $f$ would have a semi maximum at $z$. Therefore, no such $z$ can exist. We conclude that $\AllP{z<x}f(z) \leq f(x)$.
+    
+    We have shown that $\AllP{x,z\in\R}z<x \implies f(z) \leq f(x)$. $f$ is monotonically increasing. 
+\end{Case}
+\begin{Case}{2}{$\All{y<x}f(y) \geq f(x)$}
+    If $\Exists{y<x}f(y)>f(x)$, we can use a similar argument as in the first case to show that $\AllP{z<x}f(z) \geq f(x)$. So we have $\AllP{x,z\in\R}z<x \implies f(z) \geq f(x)$, so $f$ is monotonically decreasing.
+    
+    On the other hand, if $\All{y<x}f(y)=f(x)$, then we consider 3 cases. 
+    
+    We conclude that $f$ is monotonically decreasing.
+\end{Case}
+\end{Proof}
+\end{Problem}
+
+\subsection*{Problem 4.20}
+\paragraph{Hypothesis} $E$ is a nonempty subset of a metric space $X$. $\rho_E : X \rightarrow \mathbb{R} : x \rightarrow \inf_{z \in E}d(x,z)$.
+\paragraph{Claim (a)} $\rho_E(x)=0 \iff x \in \overline{E}$ 
+\paragraph{Proof} Consider $x \in \overline{E}$. We have $\forall\epsilon>0,\, \exists z \in E : d(x,z)<\epsilon$. Therefore, $\inf_{z \in E}d(x,z) = 0$.
+
+Now consider $x \notin \overline{E}$. This means $x \in \overline{E}^C$, which is open. So we have $\exists\epsilon>0 : d(x,z)<\epsilon \implies z \notin \overline{E}$. Using the contrapositive: $\exists\epsilon>0 : z \in \overline{E} \implies d(x,z)\geq\epsilon$. So $\inf_{z \in E}d(x,z) \geq \epsilon > 0$.
+
+\paragraph{Claim (b)} $\rho_E$ is uniformly continuous on $X$. 
+\paragraph{Proof} First, I will show $\forall x,y \in X,\, |\rho_E(x)-\rho_E(y)| \leq d(x,y)$. 
+
+\textbf{Case 1:} $x,y \in E$. By part (a), we have $\rho_E(x)=\rho_E(y)=0$, so $|\rho_E(x)-\rho_E(y)|=0 \leq d(x,y)$.
+
+\textbf{Case 2:} One of $x,y$ is in $E$, and the other one isn't. Without loss of generality, let's say $x \notin E$ and $y \in E$. We have $\rho_E(y)=0$. We also know that $d(x,y) \in \{d(x,z) : z \in E\}$. Therefore,
+\[ |\rho_E(x)-\rho_E(y)| = \rho_E(x) = \inf_{z \in E}d(x,z) \leq d(x,y) \]
+
+\textbf{Case 3:} $x,y \notin E$. By the definition of $\rho_E$, we have
+\[ \forall z \in E \quad \rho_E(x) \leq d(x,z)  \]
+Using the triangle inequality:
+\begin{align}\label{4.20 1} \forall z \in E \quad \rho_E(x) \leq d(x,y) + d(y,z) \end{align}
+Now I will show that 
+\begin{align}\label{4.20 2} \forall\epsilon>0 \,\,\, \exists z \in E : d(y,z) \leq \rho_E(y) + \epsilon \end{align}
+Seeking a contradiction, assume this is not true for some $\epsilon$. Then $\rho_E(y) + \epsilon$ is a lower bound of $\{d(y,z) : z \in E\}$, so $\rho_E(y)$ is not the greatest lower bound, which contradicts the definition of $\rho_E$. Therefore, (\ref{4.20 2}) is true. 
+
+Combining (\ref{4.20 1}) and (\ref{4.20 2}), we get 
+\[ \forall\epsilon>0 \quad \rho_E(x) \leq d(x,y) + \rho_E(y) + \epsilon \] 
+This is equivalent to
+\[ \rho_E(x) \leq d(x,y) + \rho_E(y) \]
+Therefore, $\rho_E(x) - \rho_E(y) \leq d(x,y)$. Using the same argument with $x$ and $y$ swapped, we can conclude $\rho_E(y) - \rho_E(x) \leq d(x,y)$, so therefore $|\rho_E(x) - \rho_E(y)| \leq d(x,y)$.
+
+I've shown that $|\rho_E(x) - \rho_E(y)| \leq d(x,y)$ in all cases. So for some $\epsilon>0$, we have $d(x,y) < \epsilon \implies |\rho_E(x) - \rho_E(y)| < \epsilon$, which proves that $\rho_E$ is uniformly continuous. 
+
+\begin{Problem}{4.21}
+\begin{Hypothesis} $K$ and $F$ are disjoint subsets of a metric space $X$. $K$ is compact. $F$ is closed. \end{Hypothesis}
+\begin{Claim} $\Exists{\de>0}\AllP{p\in K,q\in F}d(p,q)>\de$ \end{Claim}
+\begin{Proof}
+\begin{Todo}
+Clean this up
+\end{Todo}
+Seeking a contradiction, assume not. So we have:
+\[ \All{\de>0}\Exists{p \in K,q \in F}d(p,q)\leq\de \]
+\[ \All{\de>0}\Exists{p \in K}\rho_F(p)\leq\de \]
+This implies 0 is a limit point of $\rho_F(K)$. We know that $0 \notin \rho_F(K)$ because $\rho_F(K)$ is positive and continuous on $K$.
+So this contradicts the fact that $\rho_F(K)$ is closed 
+\end{Proof}
+\end{Problem}
+
+\subsection*{Problem 5.1}
+\paragraph{Hypothesis} $f: \mathbb{R} \rightarrow \mathbb{R}$, and $\forall x,y \in \mathbb{R},\, |f(x)-f(y)| \leq (x-y)^2$.
+\paragraph{Claim} $f$ is constant. 
+\paragraph{Proof} We have 
+\[ \forall x,y \in \mathbb{R} \quad |f(x)-f(y)| \leq |x-y|^2 \]
+Divide both sides by $|x-y|$:
+\[  \forall x,y \in \mathbb{R} \quad \left|\frac{f(x)-f(y)}{x-y}\right| \leq |x-y| \]
+Taking the limit of each side as $y \rightarrow x$ gives us
+\[  \forall x \in \mathbb{R} \quad |f'(x)| \leq 0 \]
+By theorem 5.11b, $f$ is constant. 
+
+\subsection*{Problem 5.2}
+\paragraph{Hypothesis} $\forall x \in (a,b),\, f'(x)>0$. 
+\paragraph{Claim} $f$ is strictly increasing in $(a,b)$. If $g$ is the inverse function of $f$, $g$ is differentiable, and $\forall x \in (a,b),\, g'(f(x)) = 1/f'(x)$. 
+\paragraph{Proof} Let $x,y \in (a,b)$ with $x<y$. $f$ is differentiable on $(x,y)$, so by theorem 5.10 we have
+\[ \exists z \in (x,y) : f(y)-f(x)=(y-x)f'(z) \]
+$y-x$ is positive, and $f'(z)$ is positive by our hypothesis, therefore $f(y)-f(x)$ is positive. This proves
+\[ \forall x,y \in (a,b),\, x < y \implies f(x)<f(y) \]
+So $f$ is strictly increasing on $(a,b)$. This means $f$ has an inverse function $g: f((a,b)) \rightarrow (a,b)$ with the property that $\forall x \in (a,b),\, g(f(x)) = x$. 
+
+Now I will show that $g'(x)$ exists for all $x \in (a,b)$:
+\begin{align*}
+\lim_{s \rightarrow y}\frac{g(y)-g(s)}{y-s} &= \lim_{t \rightarrow x}\frac{g(f(x))-g(f(t))}{f(x)-f(t)} \\
+&= \lim_{t \rightarrow x}\frac{x-t}{f(x)-f(t)} \\
+&= \lim_{t \rightarrow x}\frac{1}{\frac{f(x)-f(t)}{x-t}} \\
+&= \frac{1}{\lim_{t \rightarrow x}\frac{f(x)-f(t)}{x-t}} \\
+&= \frac{1}{f'(x)}
+\end{align*}
+$f'(x)$ exists and is nonzero for all $x \in (a,b)$, therefore $g'(x)$ also exists. 
+
+By the definition of $g$, we have $\forall x\in(a,b),\, (g \circ f)(x)=x$. Therefore,  $\forall x\in(a,b),\, (g \circ f)'(x)=1$. By theorem 5.5, we also have $\forall x\in(a,b),\, (g \circ f)'(x)=g'(f(x))f'(x)$. So $1 = g'(f(x))f'(x)$, and we can conclude $g'(f(x))=1/f'(x)$.
+
+\subsection*{Problem 5.3}
+\paragraph{Hypothesis} $g: \mathbb{R} \rightarrow \mathbb{R}$. $g$ is differentiable on $\mathbb{R}$. $\exists M>0 : \forall x \in \mathbb{R},\, |g'(x)| < M$. 
+
+For each $\epsilon>0$, define $f_\epsilon : \mathbb{R} \rightarrow \mathbb{R} : x \rightarrow x + \epsilon g(x)$.
+\paragraph{Claim} $\exists z>0 : \epsilon < z \implies f_\epsilon$ is 1-1. 
+\paragraph{Proof} Let $0 < \epsilon < 1/M$. $f_\epsilon$ is the sum of two differentiable functions, so by theorem 5.3 it is differentiable.
+\begin{align*}
+f_\epsilon'(x) &= \lim_{t \rightarrow x}\frac{x-t}{x-t} + \lim_{t \rightarrow x}\frac{\epsilon g(x)-\epsilon g(t)}{x-t} \\
+&= \lim_{t \rightarrow x}1 + \epsilon\lim_{t \rightarrow x}\frac{g(x)-g(t)}{x-t} \\
+&= 1 + \epsilon g'(x)
+\end{align*}
+
+From the bound on $g'$, we know that $1-\epsilon M < f_\epsilon'(x) < 1+\epsilon M$. We also know from the definition of $\epsilon$ that $0 <\epsilon M < 1$. Combining these, we get $0 < f_\epsilon'(x) < 2$. By the logic in the previous exercise, we see that $f_\epsilon$ is strictly increasing. This implies it is 1-1. 
+
+I have proved that $0 < \epsilon < 1/M \implies f_\epsilon$ is 1-1.
+
+\begin{Problem}{5.4}
+\begin{Claim} $\AllP{x,y\in\R,n\in\N} x^n-y^n = (x-y) \sum_{j=1}^n x^{n-j}y^{j-1}$ \end{Claim}
+\begin{Todo} Prove this \end{Todo}
+\begin{Hypothesis} $C_0,C_1,\ldots,C_n\in\R$ such that $\sum_{i=0}^n C_i/(i+1) =0$. \,\,$f:\R\rightarrow\R:x\rightarrow \sum_{i=0}^n C_ix^i$. \end{Hypothesis}
+\begin{Claim} $\Exists{x\in(0,1)}f(x)=0$ \end{Claim}
+\begin{Proof}
+Let $g:\R\rightarrow\R$ be defined as
+\[ g(x) = \sum_{i=0}^n \frac{C_i}{i+1}x^{i+1} \]
+Clearly, $g(0)=0$. By our hypothesis, we also have
+\[ g(1) = \sum_{i=0}^n \frac{C_i}{i+1} =0 \]
+Now I will show that $g$ is differentiable and that $g' = f$.
+\begin{align*}
+    g'(x) &= \Lim{t}{x}\frac{g(x)-g(t)}{x-t} \\
+    &= \Lim{t}{x}\frac{\sum_{i=0}^n \frac{C_i}{i+1}x^{i+1}-\sum_{i=0}^n \frac{C_i}{i+1}t^{i+1}}{x-t} \\
+    &= \Lim{t}{x}\frac{\sum_{i=0}^n \frac{C_i}{i+1}\Parens{x^{i+1}-t^{i+1}}}{x-t} \\
+    &= \Lim{t}{x}\frac{\sum_{i=0}^n \frac{C_i}{i+1}(x-t)\sum_{j=1}^{i+1}x^{i+1-j}t^{j-1}}{x-t} &\text{by our previous result} \\
+    &= \Lim{t}{x}\sum_{i=0}^n \frac{C_i}{i+1}\sum_{j=1}^{i+1}x^{i+1-j}t^{j-1} \\
+    &= \sum_{i=0}^n\frac{C_i}{i+1}\sum_{j=1}^{i+1}x^{i+1-j}x^{j-1} & \text{because we have a continuous function (theorem 4.6)}\\
+    &= \sum_{i=0}^n\frac{C_i}{i+1}\sum_{j=1}^{i+1}x^i \\
+    &= \sum_{i=0}^n\frac{C_i}{i+1}(i+1)x^i \\
+    &= \sum_{i=0}^n C_i x^i \\
+    &= f(x)
+\end{align*}
+Now by theorem 5.10, we have
+\[ \Exists{x\in(0,1)} g(1)-g(0) = (1-0)f(x) \]
+Which proves that $\Exists{x\in(0,1)} f(x)=0$.
+\end{Proof}
+\end{Problem}
+
+\begin{Problem}{5.5}
+\begin{Hypothesis}
+$f : (0,\infty) \rightarrow \R$. $f$ is differentiable on $(0,\infty)$. $\Lim{x}{\infty}f'(x)=0$. 
+
+$g:(0,\infty)\rightarrow\R:x\rightarrow f(x+1)-f(x)$. 
+\end{Hypothesis}
+\begin{Claim} $\Lim{x}{\infty}g(x)=0$ \end{Claim}
+\begin{Proof}
+We need to show:
+\begin{align}\label{5.5 wts} \All{\e>0}\Exists{C\in\R}c > C \implies |g(c)|<\epsilon \end{align}
+Fix an $\e>0$. We have
+\[ \Exists{C\in\R}c>C\implies|f'(c)|<\e \]
+Fix a $c>C$. By theorem 5.10, we have
+\begin{align*} 
+\Exists{x\in(c,c+1)}f(c+1)-f(c) &= (c+1-c)f'(x) \\
+g(c) &= f'(x)
+\end{align*}
+$x>c>C$, so $|f'(x)|<\e$, and therefore $|g(c)|<\e$. This proves (\ref{5.5 wts}).
+\end{Proof}
+\end{Problem}
+
+\end{document} 
